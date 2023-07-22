@@ -7,6 +7,19 @@ const userSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
+gender:{
+  type: String,
+  required: true,
+  enum: { values: ['Male', 'Female'], message: 'only Male or Female values allowed' }
+},
+age:{
+  type: Number,
+  required: true,
+  min:[18,'must be atleast 18 years and above']
+},
+dp:{
+  type:String
+},
   email: {
     required: true,
     type: String,

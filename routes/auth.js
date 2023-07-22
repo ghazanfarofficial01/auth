@@ -22,7 +22,7 @@ authRouter.get('/confirmation/:token',async(req,res) =>{
 //SIGNUP THROUGH EMAIL AND PASSWORD ROUTE
 authRouter.post("/api/signup", async (req, res) => {
     try {
-      const { name, email, password } = req.body;
+      const { name, gender,age,dp,email, password } = req.body;
   
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -36,7 +36,10 @@ authRouter.post("/api/signup", async (req, res) => {
       let user = new User({
         email,
         password:hashedPassword,
-        name
+        name,
+        gender,
+        age,
+        dp
       });
       user = await user.save();
       
@@ -49,10 +52,10 @@ authRouter.post("/api/signup", async (req, res) => {
       jwt.sign(id , 'mysecret', function(err, token) {
         const url = `http://localhost:3000/confirmation/${token}`
         const data = {
-          from: 'no-reply@biscuit',
+          from: 'no-reply@hustle',
           to: email,
           subject: 'Email Verification',
-          html: `<h2>Kindly verify your email to proceed further on biscuit app.</h2>
+          html: `<h2>Kindly verify your email to proceed further on the app.</h2>
                  <a href = "${url}">click here to verify</a>`
       };
       mg.messages().send(data, function (error, body) {

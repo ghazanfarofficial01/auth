@@ -12,10 +12,12 @@ const app = express();
 
 //IMPORTS FROM OTHER FILES
 const authRouter = require('./routes/auth');
+const MobilesRouter = require('./routes/getMobiles');
 
 //middlewares
 app.use(express.json());
 app.use(authRouter);
+app.use(MobilesRouter);
 //CONNECTIONS
 mongoose.connect(DB).then(()=>{
     console.log('connection successful');
