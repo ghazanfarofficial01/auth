@@ -7,7 +7,11 @@ const mobileSchema = mongoose.Schema({
       required: true,
       trim: true,
     },
-    
+    pictures:[
+     {
+      type: String,
+     }
+    ],
     modelName:{
         type: String,
         required: true,
@@ -17,7 +21,11 @@ const mobileSchema = mongoose.Schema({
       type: Number,
       required: true,
     },
+    discount_percentage:{
+      type: Number,
+      default:0
 
+    },
     description:{
       type: String,
       trim: true

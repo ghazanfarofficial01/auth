@@ -1,7 +1,7 @@
 const express = require('express')
 const MobilesRouter = express.Router();
 const Mobile = require('../models/mobile')
-
+const Brands = require('../models/brands')
 //to fetch best condtion mobiles
 MobilesRouter.get('/api/get-mobiles-best-condition', async (req, res) => {
     try{
@@ -42,4 +42,17 @@ MobilesRouter.get('/api/get-mobiles-premium', async (req, res) => {
       res.status(500).json({ error: e.message });
     }
 })
+
+//to fetch mobile brands
+MobilesRouter.get('/api/brands', async(req,res)=>{
+   try{
+      const brands = await Brands.find({});
+      res.json(brands)
+   }catch(e){
+    res.status(500).json({ error: e.message });
+   }
+
+})
+
+
 module.exports = MobilesRouter;
