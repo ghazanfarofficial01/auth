@@ -53,4 +53,16 @@ MobilesRouter.get("/api/brands", async (req, res) => {
   }
 });
 
+//route to post a new mobile
+MobilesRouter.post("/api/mobile/new", async (req, res) => {
+  //const {brand,pictures,modelName,price,originalPrice,discount_percentage,description = "",condition,rating,unitsSold,inStock,category,RAM,storage,Battery,front_camera,rear_camera,display,warrenty,color,in_the_box} = req.body;
+try{
+  let newMobile = new Mobile(req.body);
+  newMobile = await newMobile.save();
+  console.log(newMobile);
+  res.status(201).send("success");
+}catch(e){
+  res.status(500).json({error: e.message})
+}
+});
 module.exports = MobilesRouter;
