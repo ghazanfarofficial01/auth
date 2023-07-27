@@ -13,11 +13,13 @@ const app = express();
 //IMPORTS FROM OTHER FILES
 const authRouter = require('./routes/auth');
 const MobilesRouter = require('./routes/getMobiles');
-
+const bannerRouter = require('./routes/banner');
 //middlewares
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(authRouter);
 app.use(MobilesRouter);
+app.use(bannerRouter);
 //CONNECTIONS
 mongoose.connect(DB).then(()=>{
     console.log('connection successful');

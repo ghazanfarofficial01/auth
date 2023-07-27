@@ -56,13 +56,39 @@ MobilesRouter.get("/api/brands", async (req, res) => {
 //route to post a new mobile
 MobilesRouter.post("/api/mobile/new", async (req, res) => {
   //const {brand,pictures,modelName,price,originalPrice,discount_percentage,description = "",condition,rating,unitsSold,inStock,category,RAM,storage,Battery,front_camera,rear_camera,display,warrenty,color,in_the_box} = req.body;
-try{
-  let newMobile = new Mobile(req.body);
-  newMobile = await newMobile.save();
-  console.log(newMobile);
-  res.status(201).send("success");
-}catch(e){
-  res.status(500).json({error: e.message})
-}
+  try {
+    let newMobile = new Mobile(req.body);
+    newMobile = await newMobile.save();
+    console.log(newMobile);
+    res.status(201).send("success");
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//get a single mobile details
+MobilesRouter.get("/api/mobile/", async (req, res) => {
+  try {
+    const id = req.query.id;
+
+    const mobile = await Mobile.findById(id);
+
+    res.status(200).json(mobile);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+//delete a mobile route
+MobilesRouter.delete("/admin/mobile/delete", async (req, res) => {
+  try {
+    const id = req.query.id;
+    console.log(id);
+    const mobile = await Mobile.findByIdAndDelete(id);
+    console.log(mobile);
+    res.status(200).json({ message: "success" });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 module.exports = MobilesRouter;
